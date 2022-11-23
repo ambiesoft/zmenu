@@ -129,7 +129,8 @@ CHIcon getIconFromPath_obsolete(HWND hWnd)
 
 CHIcon getIconFromHwnd(HWND hWnd)
 {
-	CHIcon a ((HICON)SendMessage(hWnd, WM_GETICON, ICON_SMALL2, 0));
+	HICON h = (HICON)SendMessage(hWnd, WM_GETICON, ICON_SMALL2, 0);
+	CHIcon a (h);
 	return a;
 }
 void makeOwnerDraw(HMENU hMenu, UINT cmd)
@@ -251,7 +252,9 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 		}
 
 		CHIcon hhh(getIconFromHwnd(gCmdMap[dis->itemID]));
-		if (!DrawIconEx(dis->hDC,
+		if(!hhh)
+			hhh = getIconFromPath_obsolete(gCmdMap[dis->itemID]);
+		if (hhh && !DrawIconEx(dis->hDC,
 			dis->rcItem.left, dis->rcItem.top + gItemDeltaY,
 			hhh,
 			gIconWidth, gIconHeight,
