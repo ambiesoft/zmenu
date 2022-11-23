@@ -108,7 +108,7 @@ void ErrorExit(DWORD le)
 	ErrorExit(GetLastErrorString(le).c_str(), le);
 }
 
-CHIcon getIconFromPath(HWND hWnd)
+CHIcon getIconFromPath_obsolete(HWND hWnd)
 {
 	wstring targetExe = GetFileNameFromHwndAsWstring(hWnd);
 	if (targetExe.empty())
@@ -125,7 +125,12 @@ CHIcon getIconFromPath(HWND hWnd)
 		ErrorExit(GetLastError());
 	}
 	return CHIcon(sfi.hIcon);
+}
 
+CHIcon getIconFromHwnd(HWND hWnd)
+{
+	CHIcon a ((HICON)SendMessage(hWnd, WM_GETICON, ICON_SMALL2, 0));
+	return a;
 }
 void makeOwnerDraw(HMENU hMenu, UINT cmd)
 {
@@ -245,9 +250,10 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 			SelectObject(dis->hDC, old);
 		}
 
+		CHIcon hhh(getIconFromHwnd(gCmdMap[dis->itemID]));
 		if (!DrawIconEx(dis->hDC,
 			dis->rcItem.left, dis->rcItem.top + gItemDeltaY,
-			getIconFromPath(gCmdMap[dis->itemID]),
+			hhh,
 			gIconWidth, gIconHeight,
 			0, 0, DI_MASK | DI_IMAGE))
 		{
