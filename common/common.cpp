@@ -7,7 +7,7 @@ std::wstring GetIniPath()
 {
 	return stdCombinePath(
 		stdGetParentDirectory(stdGetModuleFileName()),
-		L"ShowQL.ini");
+		L"zmenu.ini");
 }
 std::wstring GetWindowTextString(HWND hWnd)
 {

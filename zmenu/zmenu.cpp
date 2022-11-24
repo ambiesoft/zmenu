@@ -26,7 +26,7 @@
 #include "../../lsMisc/GetFileNameFromHwnd.h"
 #include "../../profile/cpp/Profile/include/ambiesoft.profile.h"
 
-#include "common.h"
+#include "../common/common.h"
 
 #include "gitrev.h"
 
@@ -37,7 +37,7 @@ using namespace Ambiesoft;
 using namespace Ambiesoft::stdosd;
 using namespace std;
 
-#define APPNAME L"ShowQL"
+#define APPNAME L"zmenu"
 #define WAIT_AFTER_LAUNCH (5 * 1000)
 #define WAIT_FOR_PROCESSIDLE (30 * 1000)
 
@@ -369,7 +369,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
 	i18nInitLangmap(hInstance, NULL, APPNAME);
 
-	CKernelHandle singleMutex(CreateMutex(NULL, TRUE, L"ShowQLSingleInstance"));
+	CKernelHandle singleMutex(CreateMutex(NULL, TRUE, L"zmenuSingleInstance"));
 	if (!singleMutex)
 		ErrorExit(GetLastError());
 	DWORD dwLastError = ::GetLastError();
@@ -501,7 +501,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	{
 		wstring appOption = stdCombinePath(
 			stdGetParentDirectory(stdGetModuleFileName()),
-			L"ShowQLOption.exe");
+			L"zmenuOption.exe");
 		OpenAndWait(wnd, appOption.c_str());
 	}
 	else if (gCmdMap.find(cmd) != gCmdMap.end())
