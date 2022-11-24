@@ -122,7 +122,7 @@ CHIcon getIconFromPath_obsolete(HWND hWnd)
 		sizeof(sfi),
 		SHGFI_ICON | SHGFI_SMALLICON))
 	{
-		ErrorExit(GetLastError());
+		return CHIcon();
 	}
 	return CHIcon(sfi.hIcon);
 }

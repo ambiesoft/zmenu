@@ -198,6 +198,7 @@
     <ResourceCompile Include="zmenu.rc" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="icon1.ico" />
     <Image Include="small.ico" />
     <Image Include="zmenu.ico" />
   </ItemGroup>
