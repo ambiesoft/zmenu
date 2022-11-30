@@ -302,7 +302,11 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 			AppendMenu(hMenu,
 				MF_BYCOMMAND,
 				cmd,
+#ifdef _DEBUG
+				(stdGetHexString(h) + L" " + GetWindowTextString(h)).c_str());
+#else
 				GetWindowTextString(h).c_str());
+#endif
 			if (!gbNoIcon)
 			{
 				makeOwnerDraw(hMenu, cmd);
