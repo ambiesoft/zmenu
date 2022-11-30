@@ -131,6 +131,12 @@
     <Image Include="res\zmenuOption.ico">
       <Filter>03 Resource Files</Filter>
     </Image>
+    <Image Include="icon1.ico">
+      <Filter>03 Resource Files</Filter>
+    </Image>
+    <Image Include="icon.ico">
+      <Filter>03 Resource Files</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <Text Include="lang\jpn.txt">

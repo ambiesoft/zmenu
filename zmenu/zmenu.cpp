@@ -60,7 +60,6 @@ map<UINT, HWND> gCmdMap;
 map<HMENU, wstring> gPopupMap;
 
 bool gbNoIcon = false;
-bool gbShowHidden = false;
 int gIconWidth, gIconHeight;
 UINT gItemHeight;
 UINT gItemDeltaY;
@@ -385,7 +384,6 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
 	Profile::CHashIni ini(Profile::ReadAll(GetIniPath()));
 	{
-		Profile::GetBool(SECTION_OPTION, KEY_SHOW_HIDDEN, false, gbShowHidden, ini);
 		Profile::GetBool(SECTION_OPTION, KEY_NO_ICON, false, gbNoIcon, ini);
 	}
 
@@ -409,10 +407,6 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
 	parser.AddOptionRange({ L"-ni",L"--no-icon" }, 0, &gbNoIcon, ArgEncodingFlags::ArgEncodingFlags_Default,
 		I18N(L"Shows no icons"));
-
-	parser.AddOptionRange({ L"-sh",L"--show-hidden" }, 0, &gbShowHidden, ArgEncodingFlags::ArgEncodingFlags_Default,
-		I18N(L"Shows hidden directories"));
-
 
 	COption mainArgs(L"", ArgCount::ArgCount_One, ArgEncodingFlags::ArgEncodingFlags_Default,
 		I18N(L"Directory to show in menu"));

@@ -283,6 +283,8 @@
     <None Include="res\zmenuOption.rc2" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="icon.ico" />
+    <Image Include="icon1.ico" />
     <Image Include="res\zmenuOption.ico" />
   </ItemGroup>
   <ItemGroup>

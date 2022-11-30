@@ -23,20 +23,17 @@ using namespace Ambiesoft::stdosd;
 
 CzmenuOptionDlg::CzmenuOptionDlg(CWnd* pParent /*=nullptr*/)
 	: CDialogEx(IDD_ZMENUOPTION_DIALOG, pParent)
-	, m_bShowHidden(FALSE)
 	, m_bNoIcons(FALSE)
 {
-	m_hIcon = AfxGetApp()->LoadIcon(IDR_MAINFRAME);
+	m_hIcon = AfxGetApp()->LoadIcon(IDI_ICON_MAIN);
 
 	Profile::CHashIni ini(Profile::ReadAll(GetIniPath()));
-	Profile::GetInt(SECTION_OPTION, KEY_SHOW_HIDDEN, FALSE, m_bShowHidden, ini);
 	Profile::GetInt(SECTION_OPTION, KEY_NO_ICON, FALSE, m_bNoIcons, ini);
 }
 
 void CzmenuOptionDlg::DoDataExchange(CDataExchange* pDX)
 {
 	CDialogEx::DoDataExchange(pDX);
-	DDX_Check(pDX, IDC_CHECK_SHOWHIDDEN, m_bShowHidden);
 	DDX_Check(pDX, IDC_CHECK_NOICON, m_bNoIcons);
 }
 
@@ -153,7 +150,6 @@ void CzmenuOptionDlg::OnBnClickedOk()
 
 	Profile::CHashIni ini(Profile::ReadAll(GetIniPath()));
 	bool ok = true;
-	ok &= Profile::WriteInt(SECTION_OPTION, KEY_SHOW_HIDDEN, m_bShowHidden, ini);
 	ok &= Profile::WriteInt(SECTION_OPTION, KEY_NO_ICON, m_bNoIcons, ini);
 
 	ok &= Profile::WriteAll(ini, GetIniPath());
