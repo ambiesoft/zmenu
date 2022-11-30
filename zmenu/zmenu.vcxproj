@@ -157,6 +157,7 @@
     <ClInclude Include="..\..\lsMisc\HighDPI.h" />
     <ClInclude Include="..\..\lsMisc\I18N.h" />
     <ClInclude Include="..\..\lsMisc\Is64.h" />
+    <ClInclude Include="..\..\lsMisc\IsWindowPresentInTaskBar.h" />
     <ClInclude Include="..\..\lsMisc\OpenCommon.h" />
     <ClInclude Include="..\..\lsMisc\SHMoveFile.h" />
     <ClInclude Include="..\..\lsMisc\stdosd\stdosd.h" />
@@ -185,6 +186,7 @@
     <ClCompile Include="..\..\lsMisc\HighDPI.cpp" />
     <ClCompile Include="..\..\lsMisc\I18N.cpp" />
     <ClCompile Include="..\..\lsMisc\Is64.cpp" />
+    <ClCompile Include="..\..\lsMisc\IsWindowPresentInTaskBar.cpp" />
     <ClCompile Include="..\..\lsMisc\OpenCommon.cpp" />
     <ClCompile Include="..\..\lsMisc\SHMoveFile.cpp" />
     <ClCompile Include="..\..\lsMisc\stdosd\stdosd.cpp" />

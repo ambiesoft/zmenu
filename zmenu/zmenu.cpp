@@ -8,23 +8,25 @@
 #include <deque>
 #include <list>
 
-#include "../../lsMisc/CreateSimpleWindow.h"
-#include "../../lsMisc/GetLastErrorString.h"
-#include "../../lsMisc/GetFilesInfo.h"
-#include "../../lsMisc/OpenCommon.h"
-#include "../../lsMisc/DebugMacro.h"
+#include "../../lsMisc/BringWinTop.h"
+#include "../../lsMisc/CHandle.h"
 #include "../../lsMisc/CommandLineParser.h"
+#include "../../lsMisc/CreateShortcutFile.h"
+#include "../../lsMisc/CreateSimpleWindow.h"
+#include "../../lsMisc/DebugMacro.h"
+#include "../../lsMisc/GetFileNameFromHwnd.h"
+#include "../../lsMisc/GetFilesInfo.h"
+#include "../../lsMisc/GetLastErrorString.h"
 #include "../../lsMisc/GetVersionString.h"
 #include "../../lsMisc/HighDPI.h"
-#include "../../lsMisc/CHandle.h"
-#include "../../lsMisc/stop_watch.h"
-#include "../../lsMisc/Is64.h"
-#include "../../lsMisc/CreateShortcutFile.h"
-#include "../../lsMisc/stdosd/stdosd.h"
 #include "../../lsMisc/I18N.h"
-#include "../../lsMisc/BringWinTop.h"
-#include "../../lsMisc/GetFileNameFromHwnd.h"
+#include "../../lsMisc/Is64.h"
+#include "../../lsMisc/IsWindowPresentInTaskBar.h"
+#include "../../lsMisc/OpenCommon.h"
+#include "../../lsMisc/stdosd/stdosd.h"
+#include "../../lsMisc/stop_watch.h"
 #include "../../profile/cpp/Profile/include/ambiesoft.profile.h"
+
 
 #include "../common/common.h"
 
@@ -156,6 +158,8 @@ void setMenuHidden(HMENU hMenu, UINT_PTR cmd)
 	if (!SetMenuItemInfo(hMenu, (UINT)cmd, FALSE, &mii))
 		ErrorExit(GetLastError());
 }
+
+
 LRESULT CALLBACK WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
 	switch (msg)
@@ -260,7 +264,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 			gIconWidth, gIconHeight,
 			0, 0, DI_MASK | DI_IMAGE))
 		{
-			ErrorExit(GetLastError());
+			// ErrorExit(GetLastError());
 		}
 
 		RECT rS = dis->rcItem;
@@ -289,14 +293,13 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 
 		for (HWND h = GetTopWindow(nullptr); h != nullptr; h = GetNextWindow(h, GW_HWNDNEXT))
 		{
-			if (!IsWindowVisible(h))
+			if (!IsWindowPresentInTaskBar(h))
 				continue;
 
 			DTRACE_INITPOPUP(stdFormat(L"WM_INITMENUPOPUP:HWND:") + to_wstring(h));
 			TRACE_STOPWATCH(L"WM_INITMENUPOPUP process file");
 			UINT cmd = gMenuIndex++ + MENUID_START;
 
-			
 			AppendMenu(hMenu,
 				MF_BYCOMMAND,
 				cmd,
