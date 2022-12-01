@@ -507,7 +507,11 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	}
 	else if (gCmdMap.find(cmd) != gCmdMap.end())
 	{
-		BringWinTop(gCmdMap[cmd]);
+		HWND hWnd = gCmdMap[cmd];
+		if (IsIconic(hWnd))
+			ShowWindow(hWnd, SW_RESTORE);
+		else
+			BringWinTop(hWnd);
 	}
 	return 0;
 }
