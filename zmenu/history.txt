@@ -1,3 +1,7 @@
+2022/12/01 v1.0.5
+Fixed: When the window is iconic, it was not restored
+Fixed: A MessageBox was not displayed
+
 2022/12/01 v1.0.4
 Fixed: Invisible windows were shown on the menu
 
