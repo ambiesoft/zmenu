@@ -1,3 +1,6 @@
+2022/12/03 v1.0.6
+Fixed: Special explorer window that should not be displayed was displayed on the menu
+
 2022/12/01 v1.0.5
 Fixed: When the window is iconic, it was not restored
 Fixed: A MessageBox was not displayed
